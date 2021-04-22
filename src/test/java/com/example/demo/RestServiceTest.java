@@ -7,6 +7,7 @@ import com.example.demo.ProvinceAPI.Result;
 import com.example.demo.Service.RestService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 
@@ -32,6 +33,24 @@ public class RestServiceTest {
         logger.info("start link: {}", result.getLinks().getStart());
         logger.info("next link: {}", result.getLinks().getNext());
         logger.info("total: {}", result.getTotal());
+
+        //Expected which 'success' should always be true.
+        Assert.assertTrue(all.isSuccess());
+
+        //Expected which 'ResourceId' should be the same with URI parameter.
+        Assert.assertEquals("df922923-e009-4dee-92fc-d963a86ce4b8", result.getResourceId());
+
+        //Expected which limit should more than zero
+        Assert.assertTrue(result.getLimit() > 0);
+
+        //Expected which start link shouldn't be null
+        Assert.assertNotNull(result.getLinks().getStart());
+
+        //Expected which next link shouldn't be null
+        Assert.assertNotNull(result.getLinks().getNext());
+
+        //Expected which the record size should equals with limit value
+        Assert.assertEquals(result.getLimit().intValue(), result.getRecords().size());
     }
 
     private void logField(Field field){
@@ -43,3 +62,4 @@ public class RestServiceTest {
     }
 
 }
+
