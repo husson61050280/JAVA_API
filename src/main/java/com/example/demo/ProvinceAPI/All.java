@@ -1,18 +1,14 @@
 package com.example.demo.ProvinceAPI;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import lombok.Data;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
-
+@Data
 public class All {
 
-    @JsonProperty("result")
-    private Result Result;
-    public Object getResult() {
-        return Result;
-    }
-    public void setResult(Result result) {
-        Result = result;
-    }
+    private String help;
+
+    private boolean success;
+
+    private Result result;
+
 }

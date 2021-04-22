@@ -1,22 +1,33 @@
 package com.example.demo.ProvinceAPI;
 
-import com.example.demo.ProvinceAPI.Province;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@Data
 public class Result {
 
+    @JsonProperty("include_total")
+    private boolean includeTotal;
+
+    @JsonProperty("resource_id")
+    private String resourceId;
+
+    @JsonProperty("fields")
+    private List<Field> fields;
+
+    @JsonProperty("records_format")
+    private String recordsFormat;
+
     @JsonProperty("records")
-    private List<Province> records;
+    private List<Record> records;
 
-    public List<Province> getRecords() {
-        return records;
-    }
+    private Integer limit;
 
-    public void setProvince(List<Province> records) {
-        this.records = records;
-    }
+    @JsonProperty("_links")
+    private Links links;
+
+    private Integer total;
+
 }
