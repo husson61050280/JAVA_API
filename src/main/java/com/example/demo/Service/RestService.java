@@ -4,8 +4,7 @@ import com.example.demo.Covid;
 import com.example.demo.PeopleAPI.People;
 import com.example.demo.Post;
 import com.example.demo.ProvinceAPI.All;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.demo.Utils.JsonUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -62,11 +61,7 @@ public class RestService {
         logger.info("HTTP Status Code: {}", response.statusCode());
         logger.info("Response body: {}", response.body());
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-        All all = objectMapper.readValue(response.body(), All.class);
-
-        return all;
+        return JsonUtils.convertJsonToAll(response.body());
     }
 
     //People พลังงาน API
